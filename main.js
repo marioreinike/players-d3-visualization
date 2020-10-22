@@ -22,6 +22,10 @@ async function renderPlayers(players) {
 }
 
 async function renderAverage(players) {
+  // Drop previus card
+  const previusCard = document.getElementById('average');
+  if (previusCard) previusCard.remove();
+  if (!players.length) return;
   // construct average player
   const average = {
     NAME: 'Promedio',
@@ -33,10 +37,8 @@ async function renderAverage(players) {
   features.forEach(feature => {
     average[feature] = d3.mean(players.map(p => p[feature]));
   });
-  // construct card (and drop previus one)
+  // construct card
   const avgCard = await renderCardData(average, 'avg');
-  const previusCard = document.getElementById('average');
-  if (previusCard) document.removeChild(previusCard);
   avgCard.id = 'average';
   document.getElementById('navbar').appendChild(avgCard);
   // render svg
@@ -60,9 +62,27 @@ async function setHover() {
 
 getPlayers();
 
-d3.selectAll('.filter').on('change', (e) => {
-  console.log(e.target.value);
-  const filtered = filterPlayers(players);
+d3.select('#min-rating-range').on('input', (e) => {
+  document.getElementById('min-rating-value').innerText = e.target.value;
 });
 
+d3.select('#max-rating-range').on('input', (e) => {
+  document.getElementById('max-rating-value').innerText = e.target.value;
+});
 
+d3.select('#clean').on('click', (e) => {
+  document.getElementById('club-select').selectedIndex = 0;
+  document.getElementById('league-select').selectedIndex = 0;
+  document.getElementById('min-rating-range').value = 1;
+  document.getElementById('max-rating-range').value = 99;
+  document.getElementById('cards').innerHTML = '';
+  renderPlayers(players);
+});
+
+d3.selectAll('.filter').on('change', async (e) => {
+  const filtered = await filterPlayers(players);
+  // Eliminamos lo que hay en #cards
+  document.getElementById('cards').innerHTML = '';
+  // creamos las nuevas tarjetas
+  await renderPlayers(filtered);
+});

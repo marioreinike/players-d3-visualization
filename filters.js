@@ -35,10 +35,18 @@ async function setSelectOptions(players) {
 }
 
 async function filterPlayers(players) {
-  console.log('filtering');
-  minRatingValue.innerText = minRatingRange.value.toString();
-  maxRatingValue.innerText = maxRatingRange.value.toString();
-  return players;
+  // minRatingValue.innerText = minRatingRange.value.toString();
+  // maxRatingValue.innerText = maxRatingRange.value.toString();
+  return players
+    .filter((p) => {
+      if (clubSelect.value && p.CLUB !== clubSelect.value)
+        return false;
+      if (leagueSelect.value && p.LEAGUE !== leagueSelect.value)
+        return false;
+      if (p.RATING < minRatingRange.value || p.RATING > maxRatingRange.value)
+        return false;
+      return true;
+    });
 }
 
 export { setSelectOptions, filterPlayers };
