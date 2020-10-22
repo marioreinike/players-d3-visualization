@@ -11,21 +11,13 @@ const features = [
   'PHYSICAL'
 ]
 
-const cards = document.getElementById('cards');
-
-async function renderCard(player, index) {
-  const card = await renderCardData(player, index);
-  cards.appendChild(card);
-  await renderSvg(player, index);
-  return card;
-}
-
 function getRadarColor(position) {
-  if (['CB', 'RB', 'LB', 'LWB', 'RWB'].includes(position)) {
+  if (['CB', 'RB', 'LB', 'LWB', 'RWB'].includes(position))
     return radarColors[0];
-  } else if (['CM', 'CAM', 'CDM', 'LM', 'RM'].includes(position)) {
+  else if (['CM', 'CAM', 'CDM', 'LM', 'RM'].includes(position))
     return radarColors[1];
-  }
+  else if (position === 'AVG')
+    return 'blueviolet';
   return radarColors[2];
 }
 
@@ -35,7 +27,7 @@ function getCardColor(rating) {
   return cardColors[2];
 }
 
-async function renderCardData(player, i) {
+async function renderCardData(player, index) {
   const card = document.createElement('div');
   card.className = 'card';
   card.style.backgroundColor = getCardColor(player.RATING);
@@ -57,7 +49,7 @@ async function renderCardData(player, i) {
 
   const circle = document.createElement('div');
   circle.className = 'circle';
-  circle.id = `circle-${i}`;
+  circle.id = `circle-${index}`;
 
   data.appendChild(name);
   data.appendChild(club);
@@ -81,6 +73,8 @@ async function renderSvg(player, index) {
 
   // CREAMOS LA SELECCION
   const svg = d3.select(`#circle-${index}`).append('svg');
+
+  console.log(svg);
 
   // CIRCULO BLANCO
   svg
@@ -148,4 +142,4 @@ async function renderSvg(player, index) {
     .attr('fill-opacity', 0.7);
 }
 
-export { renderCard };
+export { renderCardData, renderSvg, features };
