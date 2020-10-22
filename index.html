@@ -16,6 +16,20 @@
       <h1>Hito 2</h1>
       <h3>IIC2026 - Visualización de Información</h3>
 
+      <p>Filtros:</p>
+
+      <label for="CLUB">Equipo</label>
+      <select class="filter" name="CLUB" id="club-select"></select>
+
+      <label for="LEAGUE">Liga</label>
+      <select class="filter" name="LEAGUE" id="league-select"></select>
+
+      <label for="min-rating">Rating Mínimo: <span id="min-rating-value"></span></label>
+      <input type="range" min="1" max="99" value="1" name="min-rating" id="min-rating-range" class="filter range">
+
+      <label for="max-rating">Rating Máximo: <span id="max-rating-value"></span></label>
+      <input type="range" min="1" max="99" value="99" name="max-rating" id="max-rating-range" class="filter range">
+
       <p>Cantidad de Jugadores Mostrados: <span id="qty">0</span></p>
 
     </div>

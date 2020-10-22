@@ -9,7 +9,6 @@ body {
 #flex-container {
   display: flex;
   flex-flow: row nowrap;
-  /* align-items: stretch; */
   height: 100vh;
 }
 
@@ -31,16 +30,21 @@ body {
 }
 
 .card {
-  height: 270px;
-  width: 190px;
+  height: 280px;
+  width: 200px;
   margin: 10px;
   border-radius: 10px;
-  padding: 10px;
+  padding: 10px 5px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .card p {
   margin: 0.3em;
+  font-weight: 500;
+}
+
+.rating {
   font-weight: 600;
 }
 
@@ -49,13 +53,16 @@ body {
 }
 
 .circle {
-  /* display: inline-block;
-  height: 150px;
-  width: 150px;
-  background-color: white;
-  border-radius: 50%; */
   position: relative;
-  top: 1.5em;
+  top: 1.6em;
   font-family: monospace;
   font-size: smaller;
+}
+
+#average {
+  align-self: center;
+}
+
+h1, h3 {
+  margin: 10px 0;
 }

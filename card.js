@@ -29,7 +29,7 @@ function getCardColor(rating) {
 
 async function renderCardData(player, index) {
   const card = document.createElement('div');
-  card.className = 'card';
+  card.className = `card ${player.CLUB.replace(' ', '-')}`;
   card.style.backgroundColor = getCardColor(player.RATING);
 
   const data = document.createElement('div');
@@ -37,7 +37,7 @@ async function renderCardData(player, index) {
 
   const name = document.createElement('p');
   name.className = 'name';
-  name.innerText =  `${player.RATING} ${player.NAME}`;
+  name.innerHTML =  `<span class=rating>${player.RATING}</span> ${player.NAME}`;
 
   const club = document.createElement('p');
   club.className = 'club';
@@ -73,8 +73,6 @@ async function renderSvg(player, index) {
 
   // CREAMOS LA SELECCION
   const svg = d3.select(`#circle-${index}`).append('svg');
-
-  console.log(svg);
 
   // CIRCULO BLANCO
   svg

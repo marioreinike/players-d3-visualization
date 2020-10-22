@@ -1,21 +1,24 @@
 import { renderCardData, renderSvg, features } from './card.js';
+import { setSelectOptions, filterPlayers } from './filters.js';
 
 const cards = document.getElementById('cards');
 let players;
 
 async function getPlayers() {
   players = await d3.csv('fifa_20_data.csv');
+  setSelectOptions(players);
   renderPlayers(players);
 }
 
 async function renderPlayers(players) {
-  players.forEach(async (player, index) => {
+  await players.forEach(async (player, index) => {
     const card = await renderCardData(player, index);
     cards.appendChild(card);
     await renderSvg(player, index);
   });
   document.getElementById('qty').innerText = `${players.length}`;
   await renderAverage(players);
+  await setHover();
 }
 
 async function renderAverage(players) {
@@ -40,4 +43,26 @@ async function renderAverage(players) {
   await renderSvg(average, 'avg');
 }
 
+async function setHover() {
+  let selection;
+  d3.selectAll('.card')
+    .on('mouseenter', (e, d) => {
+      d3.selectAll(`.${e.target.classList[1]}`)
+        .style('border', '2px solid red');
+    })
+    .on('mouseleave', (e, d) => {
+      d3.selectAll(`.${e.target.classList[1]}`)
+        .style('border', 'none');
+    });
+}
+
+
+
 getPlayers();
+
+d3.selectAll('.filter').on('change', (e) => {
+  console.log(e.target.value);
+  const filtered = filterPlayers(players);
+});
+
+
