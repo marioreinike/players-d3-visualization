@@ -1,0 +1,45 @@
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* #cards {
+  vertical-align: top;
+} */
+
+.card {
+  height: 250px;
+  width: 180px;
+  display: inline-block;
+  margin: 10px;
+  vertical-align: top;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.card p {
+  margin: 0.3em;
+  font-weight: 600;
+}
+
+.data {
+  height: 30%;
+}
+
+.circle {
+  /* display: inline-block;
+  height: 150px;
+  width: 150px;
+  background-color: white;
+  border-radius: 50%; */
+  position: relative;
+  top: 1.5em;
+  font-family: monospace;
+  font-size: smaller;
+}
