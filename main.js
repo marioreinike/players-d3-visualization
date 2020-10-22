@@ -19,6 +19,7 @@ async function renderPlayers(players) {
 }
 
 async function renderAverage(players) {
+  // construct average player
   const average = {
     NAME: 'Promedio',
     CLUB: '',
@@ -29,11 +30,13 @@ async function renderAverage(players) {
   features.forEach(feature => {
     average[feature] = d3.mean(players.map(p => p[feature]));
   });
+  // construct card (and drop previus one)
   const avgCard = await renderCardData(average, 'avg');
   const previusCard = document.getElementById('average');
   if (previusCard) document.removeChild(previusCard);
   avgCard.id = 'average';
   document.getElementById('navbar').appendChild(avgCard);
+  // render svg
   await renderSvg(average, 'avg');
 }
 
