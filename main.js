@@ -46,7 +46,6 @@ async function renderAverage(players) {
 }
 
 async function setHover() {
-  let selection;
   d3.selectAll('.card')
     .on('mouseenter', (e, d) => {
       d3.selectAll(`.${e.target.classList[1]}`)
@@ -57,7 +56,6 @@ async function setHover() {
         .style('border', 'none');
     });
 }
-
 
 
 getPlayers();
@@ -75,6 +73,8 @@ d3.select('#clean').on('click', (e) => {
   document.getElementById('league-select').selectedIndex = 0;
   document.getElementById('min-rating-range').value = 1;
   document.getElementById('max-rating-range').value = 99;
+  document.getElementById('min-rating-value').innerText = 1;
+  document.getElementById('max-rating-value').innerText = 99;
   document.getElementById('cards').innerHTML = '';
   renderPlayers(players);
 });

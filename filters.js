@@ -35,8 +35,6 @@ async function setSelectOptions(players) {
 }
 
 async function filterPlayers(players) {
-  // minRatingValue.innerText = minRatingRange.value.toString();
-  // maxRatingValue.innerText = maxRatingRange.value.toString();
   return players
     .filter((p) => {
       if (clubSelect.value && p.CLUB !== clubSelect.value)

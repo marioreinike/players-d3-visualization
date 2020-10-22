@@ -30,6 +30,16 @@ body {
   overflow-y: scroll;
 }
 
+@media (max-width: 720px) {
+  #flex-container {
+    flex-flow: column nowrap;
+    height: unset;
+  }
+  #cards {
+    height: unset;
+  }
+}
+
 .card {
   height: 280px;
   width: 200px;
@@ -66,4 +76,8 @@ body {
 
 h1, h3 {
   margin: 10px 0;
+}
+
+h4 {
+  margin: 0;
 }
